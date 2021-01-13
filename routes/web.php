@@ -63,5 +63,6 @@ Route::group(['prefix'=>'student'],function(){
      
 //Alternate:
     Route::group(['namespace'=>'App\Http\Controllers'],function(){
-       Route::get('student2','StudentController@laravel')->name('stud2');		
+       Route::get('student2','StudentController@laravel')->name('stud2');	
+       Route::get('student/create','StudentController@dataSend')->name('stud2.add');	
     });    

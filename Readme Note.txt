@@ -130,3 +130,105 @@ class StudentController extends Controller
     Route::group(['namespace'=>'App\Http\Controllers'],function(){
        Route::get('student2','StudentController@laravel')->name('stud2');		
     });    
+
+//Lesson 3  Database Part:16
+--------------------------
+//Goto Browser
+http://localhost:8081/dashboard/
+http://localhost:8081/phpmyadmin/
+
+//Create a Database File > nahadb
+click on database tab
+type database name nahadb
+click on create
+
+Open .env file -> 
+	  DB_CONNECTION = mysql
+	  DB_HOST = 127.0.0.1
+	  DB_PORT = 3306
+	  DB_DATABASE=nahadb      
+	  DB_USERNAME= root
+	  DB_PASSWORD=
+
+17. Creating Migration (Table)
+-------------------------------
+    php artisan make:migration create_students_table
+    Goto Migrations Folder> database>migrations>
+
+    public function up()
+    {
+        Schema::create('students', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    }
+
+   public function up()
+	{
+	   Schema::create('students',function(Blueprint $table){
+		   $table->id();
+		   $table->string('name',100) -> nullable();
+		   $table->string('age',12)-> nullable();
+		   $table->string('cell',15)->default('01818618123');
+		   $table->integer('amount');
+		   $table->string('email',100)->unique();
+		   $table->timestamps();
+	   });
+	}
+
+
+php artisan migrate
+php artisan migrate:fresh
+
+20/21. Model
+php artisan make:model Student [ModelName] 
+
+goto app/Models/Student.php
+
+class Student extends Model
+{
+    use HasFactory;
+
+    protected $table = 'students';
+	 //protected $fillable = ['name','age','cell'];
+	 protected $guarded = [];
+}
+
+23. Controller
+   php artisan make:controller ProductController
+	php artisan make:model Product -m
+	php artisan migrate
+
+Student Controller
+--------------------------------
+use App\Models\Student;
+
+class StudentController extends Controller
+{
+    public function laravel($name='Haq',$age=40){
+		   echo "Hello laravel $name $age";
+    }
+    
+    public function dataSend()
+    {
+       Student::create([
+	      'name'      => 'Nazmul',
+		  'age'       => 1200,
+          'cell'      => 10,
+          'amount'    => 200,
+          'email'     =>'naz@gmail.com'
+	   ]);
+    }	
+}
+
+Lesson 4
+---------------------------------
+
+Blade Syntax
+-------------------
+{{ $name }}
+
+php artisan make:controller StudentController
+php artisan make:model Student -m               //with migrations
+
+
