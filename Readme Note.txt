@@ -27,5 +27,5 @@ Route::get('hello', function(){ return view('hello'); });
 
 resources->views->hello.blade.php
 
-Lesson 2
+Lesson 2  Route
 -----------------------------------
